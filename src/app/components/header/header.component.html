@@ -1,0 +1,24 @@
+<!-- https://www.tutorialrepublic.com/codelab.php?topic=bootstrap&file=navbar-color-schemes -->
+
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary">
+  <a href="#" class="navbar-brand">Calendars</a>
+  <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse2">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarCollapse2">
+      <div class="navbar-nav">
+          <a href="#" class="nav-item nav-link active">Home</a>
+          <a class="nav-item nav-link" routerLink="/simple-list" routerLinkActive="active">Node Calendar List</a>
+          <a class="nav-item nav-link" routerLink="/country-list" routerLinkActive="active">Country List</a>
+          <a class="nav-item nav-link" routerLink="/indicatordata-list" routerLinkActive="active">Indicators List</a>
+
+          <a href="#" class="nav-item nav-link">About</a>
+          <a href="#" class="nav-item nav-link">Products</a>
+      </div>
+      <form class="form-inline ml-auto">
+          <input type="text" class="form-control mr-sm-2" placeholder="Search">
+          <button type="submit" class="btn btn-outline-light">Search</button>
+      </form>
+  </div>
+</nav>
