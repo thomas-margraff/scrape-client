@@ -6,7 +6,7 @@ import { retry, catchError } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class CalendarWebapiCoreService {
+export class CalendarWebapiCoreService  {
   constructor(private http: HttpClient) {}
 
   // http://localhost:22823/api/country/getactive
@@ -15,12 +15,25 @@ export class CalendarWebapiCoreService {
     if (!includeIndicators) {
       includeIndicators = false;
     }
-    return this.http.get<any>('http://localhost:22823/api/country/getactive/' + includeIndicators);
+    return this.http.get<any>('http://localhost:7000/api/country/getactive/' + includeIndicators);
   }
 
   getIndicatorDataByCurrency(currency: string) {
-    return this.http.get<any>('http://localhost:22823/api/indicatordata/GetByCurrency/' + currency);
+    return this.http.get<any>('http://localhost:7000/api/indicatordata/GetByCurrency/' + currency);
   }
+
+  getCurrencyIndicators() {
+    return this.http.get<any>('http://localhost:7000/api/indicatordata/GetCurrencyIndicators/');
+  }
+
+  getCurrencyIndicatorsByCcy(currency: string) {
+    return this.http.get<any>('http://localhost:7000/api/indicatordata/GetCurrencyIndicatorsByCcy/' + currency);
+  }
+
+  getScrapeUpdate() {
+    return this.http.get<any>('http://localhost:7000/api/scrape/getscrape/');
+  }
+
 
   handleError(error) {
     let errorMessage = '';

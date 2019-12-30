@@ -1,5 +1,17 @@
 <div class="container-fluid">
+  <button class="btn btn-primary" style="margin-top: 10px;" (click)="getIndicatorData()" type="button">Get Calendar Indicators</button>
+  <span>
+    <button class="btn btn-primary" style="margin-top: 10px;margin-left: 10px;" (click)="getScrapeUpdate()" type="button">Scrape Weekly Update</button>
+  </span>
+  <span>
+    <button class="btn btn-primary" style="margin-top: 10px;margin-left: 10px;" (click)="getCurrencyIndicators()" type="button">Get Countries and Indicators</button>
+  </span>
+  <span>
+    <button class="btn btn-primary" style="margin-top: 10px;margin-left: 10px;" (click)="getCurrencyIndicatorsByCcy()" type="button">Get Countries and Indicators By Country</button>
+  </span>
 
   <pre>{{data | json}}</pre>
 
 </div>
+
+

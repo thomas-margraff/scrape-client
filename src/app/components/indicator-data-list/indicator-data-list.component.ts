@@ -14,11 +14,44 @@ export class IndicatorDataListComponent implements OnInit {
               private toastr: ToastrService) { }
 
   ngOnInit() {
-    this.getIndicatorData();
+    // this.getIndicatorData();
   }
 
   getIndicatorData() {
     this.svc.getIndicatorDataByCurrency('USD')
+      .subscribe(data => {
+        this.data = data;
+      }, (error => {
+        this.toastr.error('first param', error);
+        console.log(error);
+      }
+    ));
+  }
+
+  getCurrencyIndicators() {
+    this.svc.getCurrencyIndicators()
+      .subscribe(data => {
+        this.data = data;
+      }, (error => {
+        this.toastr.error('first param', error);
+        console.log(error);
+      }
+    ));
+  }
+
+  getCurrencyIndicatorsByCcy() {
+    this.svc.getCurrencyIndicatorsByCcy('USD')
+      .subscribe(data => {
+        this.data = data;
+      }, (error => {
+        this.toastr.error('first param', error);
+        console.log(error);
+      }
+    ));
+  }
+
+  getScrapeUpdate() {
+    this.svc.getScrapeUpdate()
       .subscribe(data => {
         this.data = data;
       }, (error => {
