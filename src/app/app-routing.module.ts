@@ -1,14 +1,12 @@
-import { IndicatorDataListComponent } from './components/indicator-data-list/indicator-data-list.component';
-import { CountryListComponent } from './components/country-list/country-list.component';
-import { SimpleListComponent } from './components/simple-list/simple-list.component';
+import { HomeComponent } from './components/home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
+import { ScrapeComponent } from './components/scrape/scrape.component';
 
 const routes: Routes = [
-  { path: 'simple-list', component: SimpleListComponent },
-  { path: 'country-list', component: CountryListComponent },
-  { path: 'indicatordata-list', component: IndicatorDataListComponent }
+  { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'scrape', component: ScrapeComponent },
 ];
 
 @NgModule({

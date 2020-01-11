@@ -1,0 +1,12 @@
+{
+  "webapi": {
+    "debug": "false",
+    "localHostBaseUrl": "http://localhost:1654/api",
+    "localIISBaseUrl": "http://localhost:5100/api"
+  },
+  "scraper": {
+    "debug": "false",
+    "localScrapeHostUrl": "http://localhost:3000/api/v1/scraper/week/this",
+    "localIISScrapeHostUrl": "http://localhost:5100/api/scrape/getscrape"
+  }
+}

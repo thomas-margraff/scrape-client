@@ -1,0 +1,24 @@
+ntpWebApi
+  IIS   - http://localhost:5100/swagger/index.html
+  debug - http://localhost:1654/swagger/index.html
+
+IndicatorData
+  GET
+    ​/api​/IndicatorData​/CountriesGetAll                       - Get a list of all Countries
+    ​/api​/IndicatorData​/GetByCountry​/{country}                - Top 300 IndicatorData records (sorted by ReleaseDateTime descending)
+    ​/api​/IndicatorData​/CountryIndicatorsGetAll               - get all indicators for all countries
+    /api/IndicatorData/CountryIndicatorsByCountry/{country}
+    /api/IndicatorData/GetIndicatorsForDate/{dt}
+    /api/IndicatorData/GetIndicatorsForToday
+    /api/IndicatorData/thisweek
+    /api/IndicatorData/nextweek
+    /api/IndicatorData/GroupByCcyIndicators/{currency}
+    ​/api​/IndicatorData​/GetIndicatorsGroupByCcyIndicatorName​/{currency}​/{indicatorName}
+    /api/IndicatorData/GetIndicatorsForCcyAndName/{currency}/{indicatorName}
+
+  POST
+    /api/IndicatorData/GetIndicatorHistory/search
+
+Scrape
+  GET
+    /api/Scrape/GetScrape

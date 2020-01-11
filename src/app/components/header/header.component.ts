@@ -1,4 +1,6 @@
+import { ScrapeService } from '@services/scrape.service';
 import { Component, OnInit } from '@angular/core';
+import { IndicatorData } from '@models/IndicatorData.Model';
 
 @Component({
   selector: 'app-header',
@@ -6,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
-  constructor() { }
+  indicators: Array<IndicatorData>;
+  constructor(private svc: ScrapeService) { }
 
   ngOnInit() {
   }
 
+  doScrape() {
+    this.svc.scrape().subscribe(data  => {
+      this.indicators = new Array<IndicatorData>();
+      this.indicators = data;
+    });
+  }
 }

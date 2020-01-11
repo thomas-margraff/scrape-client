@@ -1,0 +1,7 @@
+spinner
+ngx-ui-loader
+https://github.com/t-ho/ngx-ui-loader/wiki/Getting-started
+https://github.com/t-ho/ngx-ui-loader/wiki/API---NgxUiLoaderService
+https://stackblitz.com/edit/ngx-ui-loader
+https://github.com/t-ho/ngx-ui-loader/wiki/Demo
+

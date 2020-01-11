@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IndicatorDataListComponent } from './indicator-data-list.component';
+import { ScrapeComponent } from './scrape.component';
 
-describe('IndicatorDataListComponent', () => {
-  let component: IndicatorDataListComponent;
-  let fixture: ComponentFixture<IndicatorDataListComponent>;
+describe('ScrapeComponent', () => {
+  let component: ScrapeComponent;
+  let fixture: ComponentFixture<ScrapeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ IndicatorDataListComponent ]
+      declarations: [ ScrapeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(IndicatorDataListComponent);
+    fixture = TestBed.createComponent(ScrapeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

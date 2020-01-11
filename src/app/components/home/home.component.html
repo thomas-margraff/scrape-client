@@ -1,0 +1,51 @@
+<div class="container-fluid">
+
+  <div class="row mt-2">
+    <div class="col-md-12">
+      <div class="btn-group pull-left" role="group" aria-label="Button group">
+        <label class="btn ml-1 active">
+          <button (click)="getToday()" class="btn btn-primary" type="button">Today</button>
+        </label>
+        <label class="btn ml-1">
+          <button (click)="getThisWeek()" class="btn btn-primary" type="button">This Week</button>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="indicators" class="row mt-1">
+    <div class="col-md-6  table-wrapper">
+      <table class="table table-sm table-striped table-bordered table-hover table-bordered">
+        <thead>
+          <tr class="table-primary">
+            <td>Date</td>
+            <td>Time</td>
+            <td>CCY</td>
+            <td>Indicator</td>
+            <td>Actual</td>
+            <td>Forecast</td>
+            <td>Prev</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cal of indicators" style="cursor: pointer;" (click)="selectRow(cal)">
+            <td>{{cal.releaseDate}}</td>
+            <td>{{cal.releaseTime.replace("AM","am").replace("PM", "pm")}}</td>
+            <td>{{cal.currency}}</td>
+            <td>{{cal.indicator}}</td>
+            <td>{{cal.actual}}</td>
+            <td>{{cal.forecast}}</td>
+            <td>{{cal.previous}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="detailRecs" class="col-md-3 table-wrapper">
+      <pre>{{detailRecs | json}}</pre>
+    </div>
+  </div>
+
+</div>
+
+
+

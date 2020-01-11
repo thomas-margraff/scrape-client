@@ -1,3 +1,4 @@
+import { AppConfigService } from '@services/app-config.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'scrape-client';
+  cfg = {};
+  constructor(private config: AppConfigService) {
+   // console.log(config.getServerUrl());
+  }
 }
