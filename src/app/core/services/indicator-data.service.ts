@@ -1,9 +1,9 @@
+import { CountryIndicator } from '@models/CountryIndicator.Model';
 import { IndicatorDataSearchModel } from '@models/IndicatorDataSearch.Model';
 import { AppConfigService } from '@services/app-config.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { IndicatorData } from '@models/IndicatorData.Model';
 
 @Injectable({
@@ -21,6 +21,11 @@ export class IndicatorDataService {
     return this.http.get<any>(`${this.baseUrl}`);
   }
 
+  countryIndicatorsGetAll(): Observable<CountryIndicator[]> {
+    return this.http.get<CountryIndicator[]>(`${this.baseUrl}/CountryIndicatorsGetAll`);
+  }
+
+  //#region calendar
   thisWeek(): Observable<IndicatorData[]> {
     return this.http.get<IndicatorData[]>(`${this.baseUrl}` + '/thisweek');
   }
@@ -33,9 +38,15 @@ export class IndicatorDataService {
     return this.http.get<IndicatorData[]>(`${this.baseUrl}` + '/GetIndicatorsForToday');
   }
 
-  search(search: IndicatorDataSearchModel): Observable<IndicatorData[]> {
-    return this.http.post<IndicatorData[]>(`${this.baseUrl}/GetIndicatorHistory/search`, search );
+  lastWeek(): Observable<IndicatorData[]> {
+    return this.http.get<IndicatorData[]>(`${this.baseUrl}` + '/lastweek');
   }
+
+  search(search: IndicatorDataSearchModel): Observable<IndicatorData[]> {
+    return this.http.post<IndicatorData[]>(`${this.baseUrl}/GetIndicatorHistory/search1`, search );
+  }
+
+  //#endregion calendar
 
   getIndicatorsForCcyAndName(search: IndicatorDataSearchModel): Observable<IndicatorData[]> {
     search.Indicator = encodeURIComponent(search.Indicator);

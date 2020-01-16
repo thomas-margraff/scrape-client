@@ -1,6 +1,8 @@
 import { ScrapeService } from '@services/scrape.service';
 import { Component, OnInit } from '@angular/core';
-import { IndicatorData } from '@models/IndicatorData.Model';
+import { Router } from '@angular/router';
+import { AuthService } from '@services/auth.service';
+import { User } from '@shared/models/User.Model';
 
 @Component({
   selector: 'app-header',
@@ -8,16 +10,23 @@ import { IndicatorData } from '@models/IndicatorData.Model';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  indicators: Array<IndicatorData>;
-  constructor(private svc: ScrapeService) { }
+  currentUser: User;
+  collapsed = true;
+
+  constructor(
+    private router: Router,
+    private authService: AuthService) {
+    this.authService.currentUser.subscribe(x => {
+         this.currentUser = x;
+      });
+  }
 
   ngOnInit() {
   }
 
-  doScrape() {
-    this.svc.scrape().subscribe(data  => {
-      this.indicators = new Array<IndicatorData>();
-      this.indicators = data;
-    });
-  }
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+}
+
 }

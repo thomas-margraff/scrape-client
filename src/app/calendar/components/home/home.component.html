@@ -1,0 +1,93 @@
+<div class="container-fluid">
+
+  <div class="row mt-2">
+    <div class="col-md-12">
+      <div class="btn-group pull-left" role="group" aria-label="Button group">
+        <label class="btn ml-1 active">
+          <button (click)="getToday()" class="btn btn-primary" type="button">Today</button>
+        </label>
+        <label class="btn ml-1">
+          <button (click)="getThisWeek()" class="btn btn-primary" type="button">This Week</button>
+        </label>
+        <label class="btn ml-1">
+          <button (click)="getLastWeek()" class="btn btn-primary" type="button">Last Week</button>
+        </label>
+        <label class="btn ml-1">
+          <button (click)="searchNFP()" class="btn btn-primary" type="button">Search-NFP</button>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- <ul>
+    <li *ngFor="let item of indicators | paginate: { id: 'bar', itemsPerPage: 10, currentPage: q }">{{ item }}</li>
+  </ul>
+  <pagination-controls id="bar" (pageChange)="q = $event"></pagination-controls> -->
+
+  <div *ngIf="indicators" class="row mt-1">
+    <div class="col-md-6  table-wrapper">
+      <table class="table table-sm table-striped table-bordered table-hover table-bordered">
+        <caption class="table-primary" style="font-size:large; caption-side: top;text-align: left;">
+          <strong>&nbsp;Period: {{indicators[0].releaseDate}} through {{indicators[indicators.length-1].releaseDate}}</strong>
+        </caption>
+        <thead>
+          <tr class="table-primary">
+            <td>Date</td>
+            <td>Time</td>
+            <td>CCY</td>
+            <td>Indicator</td>
+            <td class="text-right">Actual</td>
+            <td class="text-right">Forecast</td>
+            <td class="text-right">Prev</td>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr *ngFor="let cal of indicators | paginate: { id: 'foo', itemsPerPage: 20, currentPage: p }"
+                style="cursor: pointer;" (click)="selectRow(cal)">
+            <td>{{cal.releaseDate}}</td>
+            <td>{{cal.releaseTime.replace("AM","am").replace("PM", "pm")}}</td>
+            <td>{{cal.currency}}</td>
+            <td>{{cal.indicator}}</td>
+            <td class="text-right" >{{cal.actual}}</td>
+            <td class="text-right">{{cal.forecast}}</td>
+            <td class="text-right">{{cal.previous}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <pagination-controls id="foo" (pageChange)="p = $event"></pagination-controls>
+    </div>
+    <div *ngIf="detailRecs.length" class="col-md-6 table-wrapper">
+      <table class="table table-sm table-striped table-bordered table-hover table-bordered">
+        <caption class="table-primary" style="font-size:large; caption-side: top;text-align: left;">
+          <strong>&nbsp;{{ detailRecs[0].currency}} - {{ detailRecs[0].indicator}}</strong>
+             <!-- - Period: {{ detailRecs[0].releaseDate}} through {{detailRecs[indicators.length-1].releaseDate}} -->
+        </caption>
+        <thead>
+          <tr class="table-primary">
+            <td>Date</td>
+            <td>Time</td>
+            <td class="text-right">Actual</td>
+            <td class="text-right">Forecast</td>
+            <td class="text-right">Prev</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cal of detailRecs | paginate: { id: 'deets', itemsPerPage: 20, currentPage: q }"
+              style="cursor: pointer;">
+            <td>{{cal.releaseDate}}</td>
+            <td>{{cal.releaseTime.replace("AM","am").replace("PM", "pm")}}</td>
+            <td class="text-right" >{{cal.actual}}</td>
+            <td class="text-right">{{cal.forecast}}</td>
+            <td class="text-right">{{cal.previous}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <pagination-controls id="deets" (pageChange)="q = $event"></pagination-controls>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- <pre>{{detailRecs | json}}</pre> -->

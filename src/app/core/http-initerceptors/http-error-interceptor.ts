@@ -5,13 +5,14 @@ import {
   HttpInterceptor,
   HttpHandler,
   HttpRequest,
-  HttpResponse,
-  HttpErrorResponse
+  HttpErrorResponse,
+  HttpEventType,
+  HttpResponse
  } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry, tap, finalize } from 'rxjs/operators';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { NgxUiLoaderConfig, NgxUiLoaderService } from 'ngx-ui-loader';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { LoggingService } from '@services/logging.service';
 
 @Injectable({
   providedIn: 'root'
@@ -40,41 +41,54 @@ http://localhost:5100/api/scrape/getscrape
 export class HttpErrorInterceptor implements HttpInterceptor {
 
   constructor(private injector: Injector,
-              private toastr: ToastrService,
-              private ngxLoader: NgxUiLoaderService
+              private ngxLoader: NgxUiLoaderService,
+              private logService: LoggingService
               ) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-  console.log(request.url);
-
-  const req = request.clone({
-    withCredentials: true,
-    headers: request.headers.set('Authentication', 'Bearer: Some-dummyCode')
-  });
-
   this.ngxLoader.start();
-
   return next.handle(request)
     .pipe(
       tap(
-        event => console.log(event)
+        (event: HttpEvent<any>) => {
+          if (event instanceof HttpResponse){
+            const eventInfo = {
+              status: event.status,
+              statusText: event.statusText,
+              url: event.url,
+              ok: event.ok,
+              type: event.type,
+            };
+
+            this.logService.logHttpResponse('HttpResponse:' + JSON.stringify(eventInfo, null, 2))
+
+          }
+        },
       ),
       catchError((error: HttpErrorResponse) => {
         let errorMessage = '';
+
+        // client-side error
         if (error.error instanceof ErrorEvent) {
-          // client-side error
           errorMessage = `Error: ${error.error.message}`;
-        } else {
-          // server-side error
-          errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
         }
-        this.toastr.error(error.statusText, errorMessage);
-        console.log(errorMessage);
-        return throwError(errorMessage);
+
+        // server-side error
+        if (error instanceof HttpErrorResponse) {
+          if (error.status === 401) {
+            // refresh token
+          }
+          errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+          // this.toastr.error(error.statusText, errorMessage);
+          return throwError(error);
+        }
+
+
       }), finalize(() => {
         this.ngxLoader.stop();
       })
     );
   }
 }
+

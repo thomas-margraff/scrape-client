@@ -1,6 +1,16 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@services/*": ["app/core/services/*"],
+      "@interceptors/*": ["app/core/http-initerceptors/*"],
+      "@shared/*": ["app/shared/*"],
+      "@models/*": ["app/shared/models/*"],
+      "@constants/*": ["app/core/constants/*"],
+      "@core/*": ["app/core/*"],
+
+    },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,

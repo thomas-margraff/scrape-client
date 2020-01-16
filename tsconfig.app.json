@@ -1,13 +1,6 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "baseUrl": "./src",
-    "paths": {
-      "@services/*": ["app/core/services/*"],
-      "@interceptors/*": ["app/core/http-initerceptors/*"],
-      "@models/*": ["app/shared/models/*"],
-      "@constants/*": ["app/core/constants/*"],
-    },
     "outDir": "./out-tsc/app",
     "types": [],
   },

@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ScrapeComponent } from './scrape.component';
+import { ScrapeComponent } from './scrape-calendar.component';
 
 describe('ScrapeComponent', () => {
   let component: ScrapeComponent;

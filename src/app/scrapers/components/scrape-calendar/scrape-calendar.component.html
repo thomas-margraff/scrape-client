@@ -1,0 +1,15 @@
+<div class="container-fluid">
+  <div class="row mt-1">
+    <div class="col-md-6">
+      <button (click)="doScrape()" class="btn btn-primary" type="button">Scrape Calendar</button>
+      <div *ngIf="indicatorData">
+        <pre>{{indicatorData | json}}</pre>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <button (click)="doPricesScrape()" class="btn btn-primary" type="button">Scrape Prices</button>
+    </div>
+
+  </div>
+</div>

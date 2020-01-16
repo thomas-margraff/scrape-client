@@ -1,0 +1,53 @@
+<div class="container-fluid">
+  <div *ngIf="countryIndicators" class="row mt-1">
+    <div class="col-md-3 table-wrapper">
+      <table class="table table-sm table-striped table-bordered table-hover table-bordered">
+        <caption class="table-primary" style="font-size:large; caption-side: top;text-align: left;">
+          <strong>&nbsp;Currency and Indicator</strong>
+        </caption>
+
+        <thead>
+          <tr class="table-primary">
+            <td>CCY</td>
+            <td>Indicator</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ind of countryIndicators" style="cursor: pointer;" (click)="selectRow(ind)">
+            <td>{{ind.currency}}</td>
+            <td>{{ind.indicator}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="detailRecs" class="col-md-4 table-wrapper">
+      <table class="table table-sm table-striped table-bordered table-hover table-bordered">
+        <caption class="table-primary" style="font-size:large; caption-side: top;text-align: left;">
+          <strong>&nbsp;
+            {{ selectedIndicator.currency}} - {{ selectedIndicator.indicator}}</strong>
+        </caption>
+        <thead>
+          <tr class="table-primary">
+            <td>Date</td>
+            <td>Time</td>
+            <td class="text-right">Actual</td>
+            <td class="text-right">Forecast</td>
+            <td class="text-right">Prev</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cal of detailRecs" style="cursor: pointer;">
+            <td>{{cal.releaseDate}}</td>
+            <td>{{cal.releaseTime.replace("AM","am").replace("PM", "pm")}}</td>
+            <td class="text-right" >{{cal.actual}}</td>
+            <td class="text-right">{{cal.forecast}}</td>
+            <td class="text-right">{{cal.previous}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+

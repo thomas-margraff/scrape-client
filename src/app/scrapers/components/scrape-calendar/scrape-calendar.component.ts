@@ -4,20 +4,26 @@ import { IndicatorData } from '@models/IndicatorData.Model';
 
 @Component({
   selector: 'app-scrape',
-  templateUrl: './scrape.component.html',
-  styleUrls: ['./scrape.component.css']
+  templateUrl: './scrape-calendar.component.html',
+  styleUrls: ['./scrape-calendar.component.css']
 })
-export class ScrapeComponent implements OnInit {
+export class ScrapeCalendarComponent implements OnInit {
   indicatorData: IndicatorData[];
 
   constructor(private scrapeSvc: ScrapeService) { }
 
   ngOnInit() {
+  }
+
+  doScrape() {
     this.indicatorData = [];
     this.scrapeSvc.scrape().subscribe(data => {
       this.indicatorData = data;
     });
+  }
 
+  doPricesScrape() {
+    throw new Error('price scrape error');
   }
 
 }

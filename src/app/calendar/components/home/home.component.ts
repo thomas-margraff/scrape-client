@@ -2,6 +2,7 @@ import { IndicatorDataSearchModel } from '@models/IndicatorDataSearch.Model';
 import { IndicatorDataService } from '@services/indicator-data.service';
 import { Component, OnInit } from '@angular/core';
 import { IndicatorData } from '@models/IndicatorData.Model';
+import { error } from 'util';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +12,10 @@ import { IndicatorData } from '@models/IndicatorData.Model';
 export class HomeComponent implements OnInit {
   indicators: Array<IndicatorData>;
   detailRecs: Array<IndicatorData>;
+
+  startPeriod = '';
+  endPeriod = '';
+
   constructor(private svc: IndicatorDataService) { }
 
   ngOnInit() {
@@ -18,6 +23,7 @@ export class HomeComponent implements OnInit {
   }
 
   getThisWeek() {
+    this.detailRecs = [];
     this.svc.thisWeek().subscribe(data  => {
       this.indicators = new Array<IndicatorData>();
       this.indicators = data;
@@ -25,27 +31,47 @@ export class HomeComponent implements OnInit {
   }
 
   getNextWeek() {
+    this.detailRecs = [];
     this.svc.nextWeek().subscribe(data  => {
       this.indicators = new Array<IndicatorData>();
       this.indicators = data;
     });
   }
 
-  getToday() {
-    this.svc.today().subscribe(data  => {
+  getLastWeek() {
+    this.detailRecs = [];
+    this.svc.lastWeek().subscribe(data  => {
       this.indicators = new Array<IndicatorData>();
       this.indicators = data;
     });
   }
 
+  getToday() {
+    this.detailRecs = [];
+    this.svc.today().subscribe(data  => {
+      this.indicators = new Array<IndicatorData>();
+      this.indicators = data;
+      // throw new Error('my error');
+    });
+  }
+
+  searchNFP() {
+    this.detailRecs = [];
+    const srch = new IndicatorDataSearchModel();
+    srch.Currency = 'USD';
+    srch.Indicator = 'Non-Farm Employment Change';
+
+    this.svc.search(srch).subscribe(r => {
+      this.indicators = r;
+    });
+  }
+
   selectRow(cal: IndicatorData) {
     this.detailRecs = [];
-    console.log(cal);
     const search = new IndicatorDataSearchModel();
     search.Currency = cal.currency;
     search.Indicator = cal.indicator;
     this.svc.getIndicatorsForCcyAndName(search).subscribe( r => {
-      console.log(r);
       this.detailRecs = r;
     });
   }

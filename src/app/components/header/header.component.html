@@ -1,23 +1,65 @@
 <!-- https://www.tutorialrepublic.com/codelab.php?topic=bootstrap&file=navbar-color-schemes -->
 
-<nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
   <a href="#" class="navbar-brand">Calendars</a>
   <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse2">
       <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarCollapse2">
-      <div class="navbar-nav">
-          <a class="nav-item nav-link" routerLink="/home" routerLinkActive="active">Home</a>
-          <a class="nav-item nav-link" routerLink="/scrape" routerLinkActive="active">Scrape</a>
-          <!-- <a href="#" (click)="doScrape()" class="nav-item nav-link">Scrape</a>
-          <a class="nav-item nav-link" routerLink="/simple-list" routerLinkActive="active">Node Calendar List</a>
-          <a class="nav-item nav-link" routerLink="/country-list" routerLinkActive="active">Country List</a>
-          <a class="nav-item nav-link" routerLink="/indicatordata-list" routerLinkActive="active">Indicators List</a> -->
-      </div>
-      <!-- <form class="form-inline ml-auto">
-          <input type="text" class="form-control mr-sm-2" placeholder="Search">
-          <button type="submit" class="btn btn-outline-light">Search</button>
-      </form> -->
+    <div id="navb" class="navbar-collapse collapse hide">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-item nav-link" routerLink="/home" routerLinkActive="active">Home</a></li>
+        <li class="nav-item"><a class="nav-item nav-link" routerLink="/countryindicator" routerLinkActive="active">Country Indicators</a></li>
+        <li class="nav-item"><a class="nav-item nav-link" routerLink="/scrape" routerLinkActive="active">Scrape</a></li>
+        <li class="nav-item"><a class="nav-item nav-link" routerLink="/primeng" routerLinkActive="active">PrimeNG</a></li>
+      </ul>
+
+      <ul *ngIf="!currentUser" class="nav navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-item nav-link"
+              routerLink="/login"
+              routerLinkActive="active">
+              <span class="fa fa-sign-in"></span> Login
+            </a>
+        </li>
+        <li *ngIf="currentUser" class="nav-item dropdown" dropdown>
+          <a class="nav-link dropdown-toggle" href dropdownToggle (click)="false" id="navbarDropdownMenuLink" data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+              {{ currentUser.firstName }} {{ currentUser.lastName}}
+          </a>
+          <div class="dropdown-menu" *dropdownMenu aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item">Messages</a>
+              <a class="dropdown-item" (click)="logout()">Logout</a>
+          </div>
+      </ul>
+
+      <!-- <ul *ngIf="currentUser" class="nav navbar-nav ml-auto">
+        <li class="nav-item dropdown" dropdown>
+          <a class="nav-link dropdown-toggle" href dropdownToggle (click)="false" id="navbarDropdownMenuLink" data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+              {{ currentUser.firstName }} {{ currentUser.lastName}}
+          </a>
+          <div class="dropdown-menu" *dropdownMenu aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item">Messages</a>
+              <a class="dropdown-item" (click)="logout()">Logout</a>
+          </div>
+      </ul> -->
+
+      <ul *ngIf="currentUser" class="nav navbar-nav ml-auto">
+        <li class="dropdown" dropdown>
+          <a class="nav-link dropdown-toggle" href dropdownToggle (click)="false" id="navbarDropdownMenuLink" data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+              {{ currentUser.firstName }} {{ currentUser.lastName}}
+          </a>
+          <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
+            <li role="menuitem"><a class="dropdown-item" href="#">Messages</a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item" style="cursor: pointer;" (click)="logout()" >Logout</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>

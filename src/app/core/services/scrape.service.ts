@@ -5,9 +5,7 @@ import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { IndicatorData } from '@models/IndicatorData.Model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ScrapeService {
   scrapeUrl = '';
 

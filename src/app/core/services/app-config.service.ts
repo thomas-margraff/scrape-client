@@ -1,37 +1,23 @@
-import { Configuration, ScraperApiConfig, WebApiConfig } from '@models/Configuration.Model';
-import { Injectable } from '@angular/core';
+import { AppConfig, ScraperApiConfig, WebApiConfig } from '@models/AppConfig.Model';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { APP_CONFIG_TOKEN } from '@core/injectors/injectors';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppConfigService {
-  private configuration: Configuration;
+  private appConfig: AppConfig;
 
-  constructor(private http: HttpClient) {
-
-  }
-
-  loadAppConfig() {
-    return this.http
-      .get<Configuration>('/assets/config.json')
-      .toPromise()
-      .then(data => {
-        this.configuration = data;
-      });
+  constructor(@Inject(APP_CONFIG_TOKEN) public config: string, private http: HttpClient) {
+    this.appConfig = new AppConfig(config);
   }
 
   getWebApiServerUrl(): string {
-    if (this.configuration.webapi.debug === 'true'  ) {
-      return this.configuration.webapi.localHostBaseUrl;
-    }
-    return this.configuration.webapi.localIISBaseUrl;
+    return this.appConfig.getWebApiServerUrl();
   }
 
   getScrapeServerUrl(): string {
-    if (this.configuration.scraper.debug === 'true'  ) {
-      return this.configuration.scraper.localScrapeHostUrl;
-    }
-    return this.configuration.scraper.localIISScrapeHostUrl;
+    return this.appConfig.getScrapeServerUrl();
   }
 }

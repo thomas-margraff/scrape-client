@@ -1,0 +1,32 @@
+<div class="container-fluid">
+  <div class="col-md-5">
+    <!-- <h3 class="first">Basic</h3> -->
+    <p-table [columns]="columns" [value]="indicators" [autoLayout]="true">
+      <ng-template pTemplate="caption">
+        Calendar List
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>CCY</th>
+            <th>Indicator</th>
+            <th class="text-right">Actual</th>
+            <th class="text-right">Forecast</th>
+            <th class="text-right">Prev</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr *ngFor="let cal of indicators" style="cursor: pointer;">
+          <td>{{cal.releaseDate.replace(", 2020","")}}</td>
+          <td>{{cal.releaseTime.replace("AM","am").replace("PM", "pm")}}</td>
+          <td>{{cal.currency}}</td>
+          <td>{{cal.indicator}}</td>
+          <td class="text-right" >{{cal.actual}}</td>
+          <td class="text-right">{{cal.forecast}}</td>
+          <td class="text-right">{{cal.previous}}</td>
+        </tr>
+    </ng-template>
+  </p-table>
+  </div>
+</div>

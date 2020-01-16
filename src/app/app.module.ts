@@ -1,34 +1,30 @@
-import { AppConfigService } from '@services/app-config.service';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, InjectionToken, APP_INITIALIZER } from '@angular/core';
-
+import { PrimengUIModule } from './primeng-ui/primengui/primeng/primeng-ui.module';
+import { AuthModule } from './auth/auth.module';
+import { SharedModule } from '@shared/shared.module';
+import { CalendarModule } from './calendar/calendar.module';
+import { ScrapersModule } from './scrapers/scrapers.module';
+import { CoreModule } from '@core/core.module';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule, ErrorHandler  } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HeaderComponent } from './components/header/header.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HttpErrorInterceptor } from '@interceptors/http-error-interceptor';
-
+import { HttpClientModule } from '@angular/common/http';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { ToastrModule } from 'ngx-toastr';
-import { HomeComponent } from './components/home/home.component';
-import { ScrapeComponent } from './components/scrape/scrape.component';
-
 import { NgxUiLoaderModule, NgxUiLoaderHttpModule } from 'ngx-ui-loader';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
-const initializerConfigFn = (appConfig: AppConfigService) => {
-  return () => {
-    return appConfig.loadAppConfig();
-  };
-};
+import { AppComponent } from './app.component';
+import { HeaderComponent } from './components/header/header.component';
+import { GlobalErrorHandlerService } from '@services/global-error-handler.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    HomeComponent,
-    ScrapeComponent
   ],
   imports: [
     BrowserModule,
@@ -37,28 +33,30 @@ const initializerConfigFn = (appConfig: AppConfigService) => {
     HttpClientModule,
     NgxUiLoaderModule,
     NgxUiLoaderHttpModule,
+    BsDropdownModule.forRoot(),
     FormsModule,
+    ReactiveFormsModule,
+    AuthModule,
+    ScrapersModule,
+    CalendarModule,
+    CoreModule,
+    SharedModule,
+    PrimengUIModule,
+    AngularFontAwesomeModule,
     ToastrModule.forRoot({
-      timeOut: 5000,
+      timeOut: 10000,
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
-    })
+      closeButton: true
+    }),
   ],
   providers: [
     {
-      provide: APP_INITIALIZER,
-      useFactory: initializerConfigFn,
-      multi: true,
-      deps: [AppConfigService],
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpErrorInterceptor,
-      multi: true
+      provide: ErrorHandler,
+      useClass: GlobalErrorHandlerService
     }
   ],
   bootstrap: [AppComponent]
 })
-
 
 export class AppModule { }
