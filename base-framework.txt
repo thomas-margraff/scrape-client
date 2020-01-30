@@ -1,0 +1,38 @@
+typescript alias paths
+
+startup
+  appconfig injector
+  inject appConfig
+  assets/appConfig.json
+
+folders
+  core
+    constants
+    guards
+      auth guard
+    http-interceptors
+      http error interceptor
+      auth interceptor
+    injectors
+      appconfig injector
+    pipes
+    services
+      appconfig service
+      auth service
+      global error handling service
+      logging service
+
+  shared
+    data models
+
+misc
+  bootstrap
+
+order of implementation:
+  appConfig
+    requires:
+      appConfig.json
+      appConfig data model
+      appConfig service
+      injection token
+

@@ -9,7 +9,6 @@
       "@models/*": ["app/shared/models/*"],
       "@constants/*": ["app/core/constants/*"],
       "@core/*": ["app/core/*"],
-
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,

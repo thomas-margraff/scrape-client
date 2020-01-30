@@ -1,5 +1,4 @@
-import { ToastrService } from 'ngx-toastr';
-import { Injectable, Injector, ComponentFactoryResolver } from '@angular/core';
+import { Injectable  } from '@angular/core';
 import {
   HttpEvent,
   HttpInterceptor,
@@ -40,8 +39,7 @@ http://localhost:5100/api/scrape/getscrape
 
 export class HttpErrorInterceptor implements HttpInterceptor {
 
-  constructor(private injector: Injector,
-              private ngxLoader: NgxUiLoaderService,
+  constructor(private ngxLoader: NgxUiLoaderService,
               private logService: LoggingService
               ) { }
 
